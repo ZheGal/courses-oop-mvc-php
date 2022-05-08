@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+  course_php_database:
+    image: mariadb:latest
+    container_name: course_php_database
+    restart: unless-stopped
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - "127.0.0.1:3308:3306/tcp"
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secretpassword
+      MYSQL_DATABASE: helloworld
+      MYSQL_USER: helloworld
+      MYSQL_PASSWORD: helloworld
+    networks:
+      - course_php_network
+  
+  course_php_app:
+    build:
+      context: ./php_app
+    image: course_php_app:latest
+    container_name: course_php_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./src/:/var/www:rw
+    depends_on:
+      - course_php_database
+    networks:
+      - course_php_network
+  
+  course_php_web:
+    build:
+      context: ./php_app/nginx
+    image: course_php_web:latest
+    container_name: course_php_web
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./src/:/var/www:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - course_php_app
+    networks:
+      - course_php_network
+
+networks:
+  course_php_network:
+    name: course_php_network
+    driver: bridge
+
+volumes:
+  course_php_database:
+    name: course_php_database
