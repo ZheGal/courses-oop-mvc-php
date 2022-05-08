@@ -1,2 +1,6 @@
 <?php
-// pdo class
+
+class Database
+{
+
+}
