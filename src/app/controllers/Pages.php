@@ -4,13 +4,15 @@ class Pages extends Controller
 {
     public function __construct()
     {
-        // constructor
+        $this->postModel = $this->model('post');
     }
 
     public function index()
     {
+        $posts = $this->postModel->getPosts();
         $data = [
-            'title' => 'Welcome to the home page'
+            'title' => 'Welcome to the home page',
+            'posts' => $posts
         ];
 
         $this->view('pages/index', $data);
