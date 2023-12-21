@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PDO Database Class
  * Connect to database
@@ -13,7 +14,7 @@ class Database
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
-    
+
     private $dbh;
     private $stmt;
     private $error;
@@ -42,7 +43,7 @@ class Database
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
-            switch(true) {
+            switch (true) {
                 case is_int($value):
                     $type = PDO::PARAM_INT;
                     break;

@@ -20,7 +20,7 @@ class Pages extends Controller
         $data = [
             'title' => 'This is about page'
         ];
-        
+
         $this->view('pages/about', $data);
     }
 }
