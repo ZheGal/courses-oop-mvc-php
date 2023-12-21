@@ -1,6 +1,7 @@
 <?php
 // Access modifiers, getters, setters
-class User {
+class User
+{
     private string $name;
     private int $age;
 

@@ -1,6 +1,7 @@
 <?php
 // Statis methods & properties
-class User {
+class User
+{
     public $name;
     public $age;
     public static $minPassLength = 6;

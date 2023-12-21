@@ -1,6 +1,7 @@
 <?php
 // the constructor and destructor
-class User {
+class User
+{
     public $name;
     public $age;
 
